@@ -1,0 +1,12 @@
+name: metadata
+on: 
+  push:
+    branches:
+      - master
+jobs:
+  metadata:
+    runs-on: ubuntu-latest
+    steps:
+      - name: printing-metadata
+        run: echo " ${{toJSON(github)}}"
+

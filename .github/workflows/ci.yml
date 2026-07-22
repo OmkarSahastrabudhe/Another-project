@@ -1,0 +1,29 @@
+name: build-test
+on:
+  push:
+    branches:
+      - master
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: lit
+        run: npm lint 
+      - name: downloading-dependencies
+        run: npm ci
+      - name: test
+        run:  | 
+          npm test
+          echo "test completed successfully"
+  build: 
+    needs: test 
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: downloading-dependencies
+        run: npm ci
+      - name: build
+        run: |
+          npm run build
+          echo "build completed successfully"
