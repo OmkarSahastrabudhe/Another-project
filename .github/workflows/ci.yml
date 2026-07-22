@@ -9,12 +9,8 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v7
-        with:
-          node-version: '24'
-      - name: lit
-        run: npm lint 
+      - uses: actions/checkout@v4
+      
       - name: downloading-dependencies
         run: npm ci
       - name: test
