@@ -10,6 +10,11 @@ jobs:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
+      - name: caching downloading-dependencies
+        uses: actions/cache@v3
+        with: 
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
       
       - name: downloading-dependencies
         run: npm ci
@@ -22,6 +27,11 @@ jobs:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
+      - name: caching downloading-dependencies
+        uses: actions/cache@v3
+        with: 
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
       - name: downloading-dependencies
         run: npm ci
       - name: build
