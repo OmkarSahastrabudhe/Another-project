@@ -6,6 +6,9 @@ on:
       - 'release/**'
       - 'hotfix/**'
       - 'testing-*'
+    paths-ignore:
+      - '.github/**'
+    
       
   workflow_dispatch:
   pull_request:
