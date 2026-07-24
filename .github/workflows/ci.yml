@@ -3,19 +3,11 @@ on:
   push:
     branches:
       - master
-    paths-ignore:
-      - '.github/**'
-  workflow_dispatch:
-  pull_request:
-    branches:
-      - master
-    types:
-      - opened
     
   
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
       
@@ -27,7 +19,7 @@ jobs:
           echo "test completed successfully"
   build: 
     needs: test 
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v3
       - name: downloading-dependencies
@@ -36,3 +28,8 @@ jobs:
         run: |
           npm run build
           echo "build completed successfully"
+      - name: upload-artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-artifact 
+          path: ./dist
